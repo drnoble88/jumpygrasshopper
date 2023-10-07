@@ -1,2 +1,2 @@
 # jumpygrasshopper
-A an endless jumping game.
+An endless jumping game.
