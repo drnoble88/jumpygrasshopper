@@ -12,16 +12,66 @@ public class Grasshopper : MonoBehaviour
     private bool rotateClockwise = true; // Indicates whether to rotate clockwise or counterclockwise
     private float highAngle = 359f;
     private float lowAngle = 275f;
-    
-
+    public float panSpeed = 5.0f; // Speed of camera panning
+    public GameObject landingLeafPrefab; // Prefab of the LandingLeaf block
+    private bool shouldPan = false; // Flag to control camera panning
+    private Vector3 targetPosition; // Target position for camera panning
+    private GameObject startingLeaf;
+    private GameObject landingLeaf;
+    private float distanceBetweenLeafs;
+    private float randomFloat; 
+    private float newLeafX = -7.33f;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component on this GameObject
         rb.isKinematic = true; // Start with kinematic set to true
     }
 
+    private void Start()
+    {
+        // Initialize game objects and calculate the initial distance between leaves
+        startingLeaf = GameObject.FindWithTag("StartingLeaf");
+        landingLeaf = GameObject.FindWithTag("LandingLeaf");
+
+        if (startingLeaf != null && landingLeaf != null)
+        {
+            distanceBetweenLeafs = startingLeaf.transform.position.x - landingLeaf.transform.position.x;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("LandingLeaf") && startingLeaf != null && landingLeaf != null)
+        {
+
+                ///////////// Get this part to work!!!!!!!!! /////////////
+
+        //     GameObject oldStartingLeaf = GameObject.FindGameObjectWithTag("StartingLeaf");
+
+        // // Delete the old StartingLeaf if found
+        //     if (oldStartingLeaf != null)
+        //     {
+        //         Destroy(oldStartingLeaf);
+        //     }
+            randomFloat = Random.Range(3.0f, 14.5f);
+            collision.gameObject.tag = "StartingLeaf";
+            // Recalculate the distance between leaves whenever a collision occurs
+            distanceBetweenLeafs = startingLeaf.transform.position.x - landingLeaf.transform.position.x;
+
+            // Set the target position for camera panning
+            targetPosition = Camera.main.transform.position + Vector3.right * -distanceBetweenLeafs;
+            newLeafX += -distanceBetweenLeafs;
+            shouldPan = true;
+
+            // Instantiate a new LandingLeaf block in front of the old block
+            Instantiate(landingLeafPrefab, new Vector3(landingLeaf.transform.position.x + randomFloat, landingLeaf.transform.position.y, landingLeaf.transform.position.z), Quaternion.identity);
+            
+            RespawnGrasshopper();
+        }
+    }
         private void Update()
     {
+        
         if (!hasBeenLaunched)
         {
             RotateGrasshopper();
@@ -37,12 +87,23 @@ public class Grasshopper : MonoBehaviour
         {
             LaunchGrasshopper();
         }
+        if (shouldPan)
+        {
+            // Smoothly move the camera to the target position
+            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, targetPosition, panSpeed * Time.deltaTime);
+
+            // Check if the camera is close to the target position and stop panning
+            if (Vector3.Distance(Camera.main.transform.position, targetPosition) < 0.1f)
+            {
+                shouldPan = false;
+            }
+        }
     }
 
     void RespawnGrasshopper()
     {
         // Reset the grasshopper's position and rotation
-        transform.position = new Vector3(-7.07f, -2.13f, 0f);
+        transform.position = new Vector3(newLeafX, -2.13f, 0f);
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
         // Reset rotation variables
@@ -54,6 +115,7 @@ public class Grasshopper : MonoBehaviour
         rb.angularVelocity = 0f;
         rb.isKinematic = true;
         hasBeenLaunched = false;
+
     } 
 
     void RotateGrasshopper()
