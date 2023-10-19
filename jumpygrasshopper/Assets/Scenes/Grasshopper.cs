@@ -21,6 +21,7 @@ public class Grasshopper : MonoBehaviour
     private float distanceBetweenLeafs;
     private float randomFloat; 
     private float newLeafX = -7.33f;
+    private float newLandingLeafX;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component on this GameObject
@@ -32,6 +33,7 @@ public class Grasshopper : MonoBehaviour
         // Initialize game objects and calculate the initial distance between leaves
         startingLeaf = GameObject.FindWithTag("StartingLeaf");
         landingLeaf = GameObject.FindWithTag("LandingLeaf");
+        newLandingLeafX = landingLeaf.transform.position.x;
 
         if (startingLeaf != null && landingLeaf != null)
         {
@@ -55,17 +57,26 @@ public class Grasshopper : MonoBehaviour
         //     }
             randomFloat = Random.Range(3.0f, 14.5f);
             collision.gameObject.tag = "StartingLeaf";
+            
+            startingLeaf = GameObject.FindWithTag("StartingLeaf");
+            
             // Recalculate the distance between leaves whenever a collision occurs
-            distanceBetweenLeafs = startingLeaf.transform.position.x - landingLeaf.transform.position.x;
+            distanceBetweenLeafs = newLeafX - landingLeaf.transform.position.x;
 
             // Set the target position for camera panning
-            targetPosition = Camera.main.transform.position + Vector3.right * -distanceBetweenLeafs;
+            targetPosition = new Vector3(newLandingLeafX + 7.33f, Camera.main.transform.position.y, Camera.main.transform.position.z);
             newLeafX += -distanceBetweenLeafs;
             shouldPan = true;
 
+            //Debug.Log(distanceBetweenLeafs);
+            // Debug.Log(newLeafX);
+            // Debug.Log(targetPosition);
             // Instantiate a new LandingLeaf block in front of the old block
             Instantiate(landingLeafPrefab, new Vector3(landingLeaf.transform.position.x + randomFloat, landingLeaf.transform.position.y, landingLeaf.transform.position.z), Quaternion.identity);
-            
+            landingLeaf = GameObject.FindWithTag("LandingLeaf");
+            newLandingLeafX = landingLeaf.transform.position.x;
+            Debug.Log(newLandingLeafX);
+            Debug.Log(targetPosition);
             RespawnGrasshopper();
         }
     }
