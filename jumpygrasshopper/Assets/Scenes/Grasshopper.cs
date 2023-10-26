@@ -100,10 +100,8 @@ public class Grasshopper : MonoBehaviour
             RespawnGrasshopper();
         }
 
-        if (!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space))
+        if (!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space) && transform.position.y > -3f)
         {
-            src.clip = jump;
-            src.Play();
             LaunchGrasshopper();
         }
         if (shouldPan)
@@ -178,6 +176,8 @@ public class Grasshopper : MonoBehaviour
 
     void LaunchGrasshopper()
     {
+        src.clip = jump;
+        src.Play();
         if (currentRotation <= 276f) {
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
             rb.AddForce(transform.up * 35f, ForceMode2D.Impulse); // Launch upwards in 2D space
