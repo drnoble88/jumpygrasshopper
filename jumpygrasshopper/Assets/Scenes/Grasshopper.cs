@@ -22,6 +22,11 @@ public class Grasshopper : MonoBehaviour
     private float randomFloat; 
     private float newLeafX = -7.33f;
     private float newLandingLeafX;
+    private bool offScreen = false;
+    private GameObject oldStartingLeaf;
+    public AudioSource src;
+    public AudioClip jump, land;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component on this GameObject
@@ -30,9 +35,9 @@ public class Grasshopper : MonoBehaviour
 
     private void Start()
     {
-        // Initialize game objects and calculate the initial distance between leaves
         startingLeaf = GameObject.FindWithTag("StartingLeaf");
         landingLeaf = GameObject.FindWithTag("LandingLeaf");
+        oldStartingLeaf = GameObject.FindWithTag("StartingLeaf");
         newLandingLeafX = landingLeaf.transform.position.x;
 
         if (startingLeaf != null && landingLeaf != null)
@@ -45,20 +50,26 @@ public class Grasshopper : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("LandingLeaf") && startingLeaf != null && landingLeaf != null)
         {
-
-                ///////////// Get this part to work!!!!!!!!! /////////////
-
-        //     GameObject oldStartingLeaf = GameObject.FindGameObjectWithTag("StartingLeaf");
-
-        // // Delete the old StartingLeaf if found
-        //     if (oldStartingLeaf != null)
-        //     {
-        //         Destroy(oldStartingLeaf);
-        //     }
+            src.clip = land;
+            src.Play();
             randomFloat = Random.Range(3.0f, 14.5f);
+
+            oldStartingLeaf = GameObject.FindWithTag("StartingLeaf");
+            oldStartingLeaf.tag = "Untagged";
             collision.gameObject.tag = "StartingLeaf";
-            
             startingLeaf = GameObject.FindWithTag("StartingLeaf");
+
+            Collider2D startingLeafCollider = startingLeaf.GetComponent<Collider2D>();
+            
+            if (startingLeafCollider != null)
+            {
+                startingLeafCollider.enabled = false;
+                Debug.Log(startingLeafCollider.enabled);
+            }
+            else
+            {
+                Debug.Log("Collider not found!");
+            }
             
             // Recalculate the distance between leaves whenever a collision occurs
             distanceBetweenLeafs = newLeafX - landingLeaf.transform.position.x;
@@ -68,16 +79,11 @@ public class Grasshopper : MonoBehaviour
             newLeafX += -distanceBetweenLeafs;
             shouldPan = true;
 
-            //Debug.Log(distanceBetweenLeafs);
-            // Debug.Log(newLeafX);
-            // Debug.Log(targetPosition);
-            // Instantiate a new LandingLeaf block in front of the old block
             Instantiate(landingLeafPrefab, new Vector3(landingLeaf.transform.position.x + randomFloat, landingLeaf.transform.position.y, landingLeaf.transform.position.z), Quaternion.identity);
             landingLeaf = GameObject.FindWithTag("LandingLeaf");
             newLandingLeafX = landingLeaf.transform.position.x;
-            Debug.Log(newLandingLeafX);
-            Debug.Log(targetPosition);
             RespawnGrasshopper();
+            DeleteOldLeaf();
         }
     }
         private void Update()
@@ -96,6 +102,8 @@ public class Grasshopper : MonoBehaviour
 
         if (!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space))
         {
+            src.clip = jump;
+            src.Play();
             LaunchGrasshopper();
         }
         if (shouldPan)
@@ -109,6 +117,23 @@ public class Grasshopper : MonoBehaviour
                 shouldPan = false;
             }
         }
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+        bool isOffScreen = screenPosition.y < -80;
+
+        if (isOffScreen)
+        {
+            // Stop the grasshopper when it goes offscreen
+            rb.velocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+            rb.isKinematic = true;
+            hasBeenLaunched = false;
+            offScreen = true;
+        }
+        else
+        {
+            offScreen = false;
+        }
+
     }
 
     void RespawnGrasshopper()
@@ -202,5 +227,16 @@ public class Grasshopper : MonoBehaviour
             rb.AddForce(transform.up * 15f, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
         }
+    }
+    void DeleteOldLeaf()
+    {
+        StartCoroutine(DeleteWithDelay());
+    }
+
+    IEnumerator DeleteWithDelay()
+    {
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(0.2f);
+            Destroy(oldStartingLeaf);
     }
 }
