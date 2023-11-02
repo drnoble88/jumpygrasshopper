@@ -26,6 +26,7 @@ public class Grasshopper : MonoBehaviour
     private GameObject oldStartingLeaf;
     public AudioSource src;
     public AudioClip jump, land;
+    public Scoring score;
 
     private void Awake()
     {
@@ -82,13 +83,14 @@ public class Grasshopper : MonoBehaviour
             Instantiate(landingLeafPrefab, new Vector3(landingLeaf.transform.position.x + randomFloat, landingLeaf.transform.position.y, landingLeaf.transform.position.z), Quaternion.identity);
             landingLeaf = GameObject.FindWithTag("LandingLeaf");
             newLandingLeafX = landingLeaf.transform.position.x;
+            
             RespawnGrasshopper();
             DeleteOldLeaf();
+            score.AddScore();
         }
     }
         private void Update()
     {
-        
         if (!hasBeenLaunched)
         {
             RotateGrasshopper();
@@ -98,6 +100,7 @@ public class Grasshopper : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             RespawnGrasshopper();
+            score.ResetScore();
         }
 
         if (!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space) && transform.position.y > -3f)
