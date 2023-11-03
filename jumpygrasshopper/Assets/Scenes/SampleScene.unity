@@ -367,7 +367,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.002064751, g: 0.5471698, b: 0.09375767, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -399,7 +399,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639242460}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -748,7 +748,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -851,6 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchForce: 17
   rotationSpeed: 80
+  testAngle: 35
   panSpeed: 5
   landingLeafPrefab: {fileID: 7195638604981831317, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
   src: {fileID: 2137069573}
@@ -1012,6 +1013,18 @@ PrefabInstance:
     - target: {fileID: 2605589359250284607, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
+      propertyPath: m_Color.b
+      value: 0.08627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
+      propertyPath: m_Color.g
+      value: 0.54509807
+      objectReference: {fileID: 0}
+    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
+      propertyPath: m_Color.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7195638604981831317, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
       propertyPath: m_Name

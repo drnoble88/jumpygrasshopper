@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Grasshopper : MonoBehaviour
 {
-    public float launchForce = 10f; // The force to apply when launching the Grasshopper
     public float rotationSpeed = 30f; // The rotation speed in degrees per second
     private Rigidbody2D rb; // Rigidbody2D reference
     private bool hasBeenLaunched = false;
     private float currentRotation = 280f; // Track the current rotation angle
     private bool rotateClockwise = true; // Indicates whether to rotate clockwise or counterclockwise
-    private float highAngle = 359f;
-    private float lowAngle = 275f;
+    private float highAngle = 355f;
+    private float lowAngle = 280f;
     public float panSpeed = 5.0f; // Speed of camera panning
     public GameObject landingLeafPrefab; // Prefab of the LandingLeaf block
     private bool shouldPan = false; // Flag to control camera panning
@@ -36,6 +35,7 @@ public class Grasshopper : MonoBehaviour
 
     private void Start()
     {
+        
         startingLeaf = GameObject.FindWithTag("StartingLeaf");
         landingLeaf = GameObject.FindWithTag("LandingLeaf");
         oldStartingLeaf = GameObject.FindWithTag("StartingLeaf");
@@ -119,7 +119,7 @@ public class Grasshopper : MonoBehaviour
             }
         }
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        bool isOffScreen = screenPosition.y < -80;
+        bool isOffScreen = screenPosition.y < -80; //-250
 
         if (isOffScreen)
         {
@@ -181,53 +181,127 @@ public class Grasshopper : MonoBehaviour
     {
         src.clip = jump;
         src.Play();
-        if (currentRotation <= 276f) {
+
+        float launchAngle = currentRotation % 360;
+
+        if (currentRotation <= 285f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(281f, 285f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(28f, 24.4f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 35f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 277f){
+        }
+        else if (currentRotation <= 290f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(286f, 290f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(23.5f, 20.9f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 33f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 278f){
+        }
+        else if (currentRotation <= 295f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(291f, 295f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(20.3f, 18.5f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 31f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 280f){
+        }
+        else if (currentRotation <= 300f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(296f, 300f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(18f, 16.6f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 28f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 283f){
+        }
+        else if (currentRotation <= 305f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(301f, 305f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(16.5f, 15.3f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 25f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 288f){
+        }
+        else if (currentRotation <= 310f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(306f, 310f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(15.3f, 14.5f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 22f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 293f){
+        }
+        else if (currentRotation <= 315f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(311f, 315f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(14.5f, 13.8f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 20f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 300f){
+        }
+        else if (currentRotation <= 320f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(316f, 320f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(13.8f, 13f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 18f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 306f){
+        }
+        else if (currentRotation <= 325f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(321f, 325f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(13f, 12.6f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 16f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 324f){
+        }
+        else if (currentRotation <= 330f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(326f, 330f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(12.6f, 12.5f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 13.5f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else if (currentRotation <= 342f){
+        }
+        else if (currentRotation <= 335f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(331f, 335f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(12.5f, 12f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 12f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
-        } else {
+        }
+        else if (currentRotation <= 340f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(336f, 340f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(12f, 12f, normalizedAngle);
             rb.isKinematic = false; // Disable kinematic to allow physics to take over
-            rb.AddForce(transform.up * 15f, ForceMode2D.Impulse); // Launch upwards in 2D space
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
+            hasBeenLaunched = true; // Mark the object as launched
+        }
+        else if (currentRotation <= 345f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(341f, 345f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(12f, 12.5f, normalizedAngle);
+            rb.isKinematic = false; // Disable kinematic to allow physics to take over
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
+            hasBeenLaunched = true; // Mark the object as launched
+        }
+        else if (currentRotation <= 350f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(346f, 350f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(12.5f, 13.5f, normalizedAngle);
+            rb.isKinematic = false; // Disable kinematic to allow physics to take over
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
+            hasBeenLaunched = true; // Mark the object as launched
+        }
+        else if (currentRotation <= 355f) {
+            
+            float normalizedAngle = Mathf.InverseLerp(351f, 355f, launchAngle);
+            float interpolatedForce = Mathf.Lerp(13f, 15f, normalizedAngle);
+            rb.isKinematic = false; // Disable kinematic to allow physics to take over
+            rb.AddForce(transform.up * interpolatedForce, ForceMode2D.Impulse); // Launch upwards in 2D space
             hasBeenLaunched = true; // Mark the object as launched
         }
     }
