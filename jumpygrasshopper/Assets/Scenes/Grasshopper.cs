@@ -119,7 +119,7 @@ public class Grasshopper : MonoBehaviour
             }
         }
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
-        bool isOffScreen = screenPosition.y < -80; //-250
+        bool isOffScreen = screenPosition.y < -150;
 
         if (isOffScreen)
         {
