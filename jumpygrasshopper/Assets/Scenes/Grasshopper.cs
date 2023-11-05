@@ -19,7 +19,7 @@ public class Grasshopper : MonoBehaviour
     private GameObject landingLeaf;
     private float distanceBetweenLeafs;
     private float randomFloat; 
-    private float newLeafX = -7.33f;
+    private float newLeafX = -7.46f;
     private float newLandingLeafX;
     private bool offScreen = false;
     private GameObject oldStartingLeaf;
@@ -140,7 +140,7 @@ public class Grasshopper : MonoBehaviour
     void RespawnGrasshopper()
     {
         // Reset the grasshopper's position and rotation
-        transform.position = new Vector3(newLeafX, -2.13f, 0f);
+        transform.position = new Vector3(newLeafX, -2.56f, 0f);
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
         // Reset rotation variables
