@@ -26,6 +26,9 @@ public class Grasshopper : MonoBehaviour
     public AudioSource src;
     public AudioClip jump, land;
     public Scoring score;
+    private GameObject background;
+    private GameObject background2;
+
 
     private void Awake()
     {
@@ -40,6 +43,8 @@ public class Grasshopper : MonoBehaviour
         landingLeaf = GameObject.FindWithTag("LandingLeaf");
         oldStartingLeaf = GameObject.FindWithTag("StartingLeaf");
         newLandingLeafX = landingLeaf.transform.position.x;
+        background = GameObject.FindWithTag("Background");
+        background2 = GameObject.FindWithTag("Background2");
 
         if (startingLeaf != null && landingLeaf != null)
         {
@@ -51,6 +56,8 @@ public class Grasshopper : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("LandingLeaf") && startingLeaf != null && landingLeaf != null)
         {
+            MoveBackground();
+            MoveBackground2();
             src.clip = land;
             src.Play();
             randomFloat = Random.Range(3.0f, 14.5f);
@@ -91,6 +98,8 @@ public class Grasshopper : MonoBehaviour
     }
         private void Update()
     {
+        
+
         if (!hasBeenLaunched)
         {
             RotateGrasshopper();
@@ -103,7 +112,7 @@ public class Grasshopper : MonoBehaviour
             score.ResetScore();
         }
 
-        if (!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space) && transform.position.y > -3f)
+        if  ((!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space) && transform.position.y > -3f) || (!hasBeenLaunched && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && transform.position.y > -3f))
         {
             LaunchGrasshopper();
         }
@@ -136,6 +145,26 @@ public class Grasshopper : MonoBehaviour
         }
 
     }
+
+    void MoveBackground()
+    {
+        float background2Position = background2.transform.position.x;
+        if (transform.position.x > background.transform.position.x + 36f)
+        {
+            background.transform.position = new Vector3(background2Position + 36f, background.transform.position.y, background.transform.position.z);
+        }
+    }
+
+    void MoveBackground2()
+    {
+        float backgroundPosition = background.transform.position.x;
+        if (transform.position.x > background2.transform.position.x + 36f)
+        {
+            background2.transform.position = new Vector3(backgroundPosition + 36f, background2.transform.position.y, background2.transform.position.z);
+        }
+    }
+
+
 
     void RespawnGrasshopper()
     {

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - LandingLeaf
   - StartingLeaf
+  - Background
+  - Background2
   layers:
   - Default
   - TransparentFX
