@@ -19,7 +19,7 @@ public class Grasshopper : MonoBehaviour
     private GameObject landingLeaf;
     private float distanceBetweenLeafs;
     private float randomFloat; 
-    private float newLeafX = -7.46f;
+    private float newLeafX = -7.33f;
     private float newLandingLeafX;
     private bool offScreen = false;
     private GameObject oldStartingLeaf;
@@ -28,6 +28,7 @@ public class Grasshopper : MonoBehaviour
     public Scoring score;
     private GameObject background;
     private GameObject background2;
+    Animator myAnimator;
 
 
     private void Awake()
@@ -45,6 +46,7 @@ public class Grasshopper : MonoBehaviour
         newLandingLeafX = landingLeaf.transform.position.x;
         background = GameObject.FindWithTag("Background");
         background2 = GameObject.FindWithTag("Background2");
+        myAnimator = GetComponent<Animator>();
 
         if (startingLeaf != null && landingLeaf != null)
         {
@@ -60,6 +62,7 @@ public class Grasshopper : MonoBehaviour
             MoveBackground2();
             src.clip = land;
             src.Play();
+            myAnimator.SetBool("isJumping", false);
             randomFloat = Random.Range(3.0f, 14.5f);
 
             oldStartingLeaf = GameObject.FindWithTag("StartingLeaf");
@@ -83,7 +86,7 @@ public class Grasshopper : MonoBehaviour
             distanceBetweenLeafs = newLeafX - landingLeaf.transform.position.x;
 
             // Set the target position for camera panning
-            targetPosition = new Vector3(newLandingLeafX + 7.33f, Camera.main.transform.position.y, Camera.main.transform.position.z);
+            targetPosition = new Vector3(newLandingLeafX + 6.79f, Camera.main.transform.position.y, Camera.main.transform.position.z);
             newLeafX += -distanceBetweenLeafs;
             shouldPan = true;
 
@@ -168,8 +171,9 @@ public class Grasshopper : MonoBehaviour
 
     void RespawnGrasshopper()
     {
+        myAnimator.SetBool("isJumping", false);
         // Reset the grasshopper's position and rotation
-        transform.position = new Vector3(newLeafX, -2.56f, 0f);
+        transform.position = new Vector3(newLeafX-.5f, -2.65f, 0f);
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
         // Reset rotation variables
@@ -210,7 +214,7 @@ public class Grasshopper : MonoBehaviour
     {
         src.clip = jump;
         src.Play();
-
+        myAnimator.SetBool("isJumping", true);
         float launchAngle = currentRotation % 360;
 
         if (currentRotation <= 285f) {
