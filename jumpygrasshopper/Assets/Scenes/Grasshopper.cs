@@ -173,7 +173,7 @@ public class Grasshopper : MonoBehaviour
     {
         myAnimator.SetBool("isJumping", false);
         // Reset the grasshopper's position and rotation
-        transform.position = new Vector3(newLeafX-.5f, -2.65f, 0f);
+        transform.position = new Vector3(newLeafX-.5f, -2.95f, 0f);
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
 
         // Reset rotation variables
