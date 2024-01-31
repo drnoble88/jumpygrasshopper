@@ -26,8 +26,14 @@ public class Grasshopper : MonoBehaviour
     public AudioSource src;
     public AudioClip jump, land;
     public Scoring score;
+    private GameObject foreground;
+    private GameObject foreground2;
+    private GameObject middleground;
+    private GameObject middleground2;
     private GameObject background;
     private GameObject background2;
+    private GameObject clouds;
+    private GameObject clouds2;
     Animator myAnimator;
 
 
@@ -39,13 +45,18 @@ public class Grasshopper : MonoBehaviour
 
     private void Start()
     {
-        
         startingLeaf = GameObject.FindWithTag("StartingLeaf");
         landingLeaf = GameObject.FindWithTag("LandingLeaf");
         oldStartingLeaf = GameObject.FindWithTag("StartingLeaf");
         newLandingLeafX = landingLeaf.transform.position.x;
+        foreground = GameObject.FindWithTag("Foreground");
+        foreground2 = GameObject.FindWithTag("Foreground2");
+        middleground = GameObject.FindWithTag("Middleground");
+        middleground2 = GameObject.FindWithTag("Middleground2");
         background = GameObject.FindWithTag("Background");
         background2 = GameObject.FindWithTag("Background2");
+        clouds = GameObject.FindWithTag("Clouds");
+        clouds2 = GameObject.FindWithTag("Clouds2");
         myAnimator = GetComponent<Animator>();
 
         if (startingLeaf != null && landingLeaf != null)
@@ -58,8 +69,15 @@ public class Grasshopper : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("LandingLeaf") && startingLeaf != null && landingLeaf != null)
         {
+            MoveForeground();
+            MoveForeground2();
+            MoveMiddleground();
+            MoveMiddleground2();
             MoveBackground();
             MoveBackground2();
+            MoveClouds();
+            MoveClouds2();
+            
             src.clip = land;
             src.Play();
             myAnimator.SetBool("isJumping", false);
@@ -101,8 +119,10 @@ public class Grasshopper : MonoBehaviour
     }
         private void Update()
     {
-        
-
+        ScrollForeground();
+        ScrollMiddleground();
+        ScrollBackground();
+        ScrollClouds();
         if (!hasBeenLaunched)
         {
             RotateGrasshopper();
@@ -149,10 +169,45 @@ public class Grasshopper : MonoBehaviour
 
     }
 
+    void MoveForeground()
+    {
+        float foreground2Position = foreground2.transform.position.x;
+        if (transform.position.x > foreground.transform.position.x + 36f)
+        {
+            foreground.transform.position = new Vector3(foreground2Position + 36f, foreground.transform.position.y, foreground.transform.position.z);
+        }
+    }
+
+    void MoveForeground2()
+    {
+        float foregroundPosition = foreground.transform.position.x;
+        if (transform.position.x > foreground2.transform.position.x + 36f)
+        {
+            foreground2.transform.position = new Vector3(foregroundPosition + 36f, foreground2.transform.position.y, foreground2.transform.position.z);
+        }
+    }
+
+    void MoveMiddleground()
+    {
+        float middleground2Position = middleground2.transform.position.x;
+        if (transform.position.x >middleground.transform.position.x + 36f)
+        {
+            middleground.transform.position = new Vector3(middleground2Position + 36f, middleground.transform.position.y, middleground.transform.position.z);
+        }
+    }
+
+    void MoveMiddleground2()
+    {
+        float middlegroundPosition = middleground.transform.position.x;
+        if (transform.position.x > middleground2.transform.position.x + 36f)
+        {
+            middleground2.transform.position = new Vector3(middlegroundPosition + 36f, middleground2.transform.position.y, middleground2.transform.position.z);
+        }
+    }
     void MoveBackground()
     {
         float background2Position = background2.transform.position.x;
-        if (transform.position.x > background.transform.position.x + 36f)
+        if (transform.position.x >background.transform.position.x + 36f)
         {
             background.transform.position = new Vector3(background2Position + 36f, background.transform.position.y, background.transform.position.z);
         }
@@ -166,7 +221,75 @@ public class Grasshopper : MonoBehaviour
             background2.transform.position = new Vector3(backgroundPosition + 36f, background2.transform.position.y, background2.transform.position.z);
         }
     }
+    void MoveClouds()
+    {
+        float clouds2Position = clouds2.transform.position.x;
+        if (transform.position.x >clouds.transform.position.x + 36f)
+        {
+            clouds.transform.position = new Vector3(clouds2Position + 36f, clouds.transform.position.y, clouds.transform.position.z);
+        }
+    }
 
+    void MoveClouds2()
+    {
+        float cloudsPosition = clouds.transform.position.x;
+        if (transform.position.x > clouds2.transform.position.x + 36f)
+        {
+            clouds2.transform.position = new Vector3(cloudsPosition + 36f, clouds2.transform.position.y, clouds2.transform.position.z);
+        }
+    }
+    void ScrollForeground()
+    {
+    // Check if the camera is panning
+    if (shouldPan)
+    {
+        // Calculate the distance the camera has moved since the last frame
+        float cameraDeltaX = (targetPosition.x - Camera.main.transform.position.x) * 0.009f;
+
+        // Adjust the middleground position by the same amount as the camera movement
+        foreground.transform.position += new Vector3(cameraDeltaX, 0f, 0f);
+        foreground2.transform.position += new Vector3(cameraDeltaX, 0f, 0f);
+        }
+    }
+    void ScrollMiddleground()
+    {
+    // Check if the camera is panning
+    if (shouldPan)
+    {
+        // Calculate the distance the camera has moved since the last frame
+        float cameraDeltaX = (targetPosition.x - Camera.main.transform.position.x) * 0.015f;
+
+        // Adjust the middleground position by the same amount as the camera movement
+        middleground.transform.position += new Vector3(cameraDeltaX, 0f, 0f);
+        middleground2.transform.position += new Vector3(cameraDeltaX, 0f, 0f);
+        }
+    }
+    void ScrollBackground()
+    {
+    // Check if the camera is panning
+    if (shouldPan)
+    {
+        // Calculate the distance the camera has moved since the last frame
+        float cameraDeltaX = (targetPosition.x - Camera.main.transform.position.x) * 0.021f;
+
+        // Adjust the middleground position by the same amount as the camera movement
+        background.transform.position += new Vector3(cameraDeltaX, 0f, 0f);
+        background2.transform.position += new Vector3(cameraDeltaX, 0f, 0f);
+        }
+    }
+    void ScrollClouds()
+    {
+    // Check if the camera is panning
+    if (shouldPan)
+    {
+        // Calculate the distance the camera has moved since the last frame
+        float cameraDeltaX = (targetPosition.x - Camera.main.transform.position.x) * 0.024f;
+
+        // Adjust the middleground position by the same amount as the camera movement
+        clouds.transform.position += new Vector3(cameraDeltaX, 0f, 0f);
+        clouds2.transform.position += new Vector3(cameraDeltaX, 0f, 0f);
+        }
+    }
 
 
     void RespawnGrasshopper()

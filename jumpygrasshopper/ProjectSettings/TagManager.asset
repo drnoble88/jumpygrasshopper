@@ -8,6 +8,12 @@ TagManager:
   - StartingLeaf
   - Background
   - Background2
+  - Middleground
+  - Middleground2
+  - Foreground
+  - Foreground2
+  - Clouds
+  - Clouds2
   layers:
   - Default
   - TransparentFX
