@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grasshopper : MonoBehaviour
 {
+    // public GameOverScreen GameOverScreen;
     public float rotationSpeed = 30f; // The rotation speed in degrees per second
     private Rigidbody2D rb; // Rigidbody2D reference
     private bool hasBeenLaunched = false;
@@ -35,8 +36,11 @@ public class Grasshopper : MonoBehaviour
     private GameObject clouds;
     private GameObject clouds2;
     Animator myAnimator;
+    
 
-
+    // public void GameOver() {
+    //     GameOverScreen.Setup(score);
+    // }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component on this GameObject

@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Scoring : MonoBehaviour
 {
-    public Text ScoreText;
-    public Text HighScoreText;
+
+
     public int score = 0;
     public int highscore = 0;
+    [SerializeField] TextMeshProUGUI ScoreText;
+    [SerializeField] TextMeshProUGUI HighScoreText;
+
     void Start()
     {
         score = 0;
