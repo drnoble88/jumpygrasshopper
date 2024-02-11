@@ -205,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 17270210}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &17270210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -515,6 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
   rotationSpeed: 30
   panSpeed: 5
   landingLeafPrefab: {fileID: 0}
@@ -773,6 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
   rotationSpeed: 30
   panSpeed: 5
   landingLeafPrefab: {fileID: 0}
@@ -902,6 +916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
   rotationSpeed: 30
   panSpeed: 5
   landingLeafPrefab: {fileID: 0}
@@ -1039,6 +1054,50 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &727600419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 727600421}
+  - component: {fileID: 727600420}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &727600420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727600419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8cc08da40f01d34e9ed5f93dfd8c052, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &727600421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727600419}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 28.816708, y: 14.11943, z: 8.466599}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &938915672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,6 +1689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
   rotationSpeed: 30
   panSpeed: 5
   landingLeafPrefab: {fileID: 0}
@@ -1637,6 +1697,11 @@ MonoBehaviour:
   jump: {fileID: 0}
   land: {fileID: 0}
   score: {fileID: 0}
+--- !u!4 &1358106708 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8829924444541406070, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
+  m_PrefabInstance: {fileID: 3874567445783809766}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1506693146 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1357080853047670139, guid: 031d5bb51e127c947acd6382eb7e6a92, type: 3}
@@ -1654,6 +1719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
   rotationSpeed: 30
   panSpeed: 5
   landingLeafPrefab: {fileID: 0}
@@ -1678,6 +1744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
   rotationSpeed: 30
   panSpeed: 5
   landingLeafPrefab: {fileID: 0}
@@ -1831,14 +1898,13 @@ GameObject:
   - component: {fileID: 1671667136}
   - component: {fileID: 1671667135}
   - component: {fileID: 1671667139}
-  - component: {fileID: 1671667138}
   m_Layer: 5
   m_Name: Gameover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1671667134
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1899,25 +1965,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671667133}
   m_CullTransparentMesh: 1
---- !u!114 &1671667138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1671667133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 30
-  panSpeed: 5
-  landingLeafPrefab: {fileID: 1671667133}
-  src: {fileID: 0}
-  jump: {fileID: 0}
-  land: {fileID: 0}
-  score: {fileID: 0}
 --- !u!114 &1671667139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2051,6 +2098,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1743147084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1743147085}
+  m_Layer: 0
+  m_Name: Light Probe Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1743147085
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743147084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1358106708}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1981631092
 GameObject:
   m_ObjectHideFlags: 0
@@ -2214,6 +2292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa03433626958434197c6f0c53c35f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 1671667133}
   rotationSpeed: 80
   panSpeed: 5
   landingLeafPrefab: {fileID: 7195638604981831317, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
@@ -2235,8 +2314,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   highscore: 0
+  finalscore: 0
   ScoreText: {fileID: 999229731}
   HighScoreText: {fileID: 938915674}
+  FinalScoreText: {fileID: 242876954}
 --- !u!95 &1981631099
 Animator:
   serializedVersion: 5
@@ -2511,42 +2592,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2605589359250284607, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 2605589359250284607, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_Size.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_Size.y
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 41d5c2d28e65dfc47844617024c2769c, type: 3}
-    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6191085986093605089, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
-      propertyPath: m_SortingOrder
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 7195638604981831317, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
       propertyPath: m_Name
       value: Landing Leaf
@@ -2593,7 +2638,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8829924444541406070, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1743147085}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c982a30ae4de29449e9cb2659993105, type: 3}
 --- !u!1001 &4191138500694523195
@@ -2853,3 +2901,4 @@ SceneRoots:
   - {fileID: 44242472}
   - {fileID: 507354704}
   - {fileID: 1731353384}
+  - {fileID: 727600421}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grasshopper : MonoBehaviour
 {
-    // public GameOverScreen GameOverScreen;
+    public GameObject gameOver;
     public float rotationSpeed = 30f; // The rotation speed in degrees per second
     private Rigidbody2D rb; // Rigidbody2D reference
     private bool hasBeenLaunched = false;
@@ -37,10 +37,6 @@ public class Grasshopper : MonoBehaviour
     private GameObject clouds2;
     Animator myAnimator;
     
-
-    // public void GameOver() {
-    //     GameOverScreen.Setup(score);
-    // }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component on this GameObject
@@ -121,7 +117,7 @@ public class Grasshopper : MonoBehaviour
             score.AddScore();
         }
     }
-        private void Update()
+    private void Update()
     {
         ScrollForeground();
         ScrollMiddleground();
@@ -133,10 +129,12 @@ public class Grasshopper : MonoBehaviour
         }
 
         // Check if the grasshopper is out of the screen boundaries
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             RespawnGrasshopper();
             score.ResetScore();
+            gameOver.SetActive(false);
         }
 
         if  ((!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space) && transform.position.y > -3f) || (!hasBeenLaunched && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && transform.position.y > -3f))
@@ -165,6 +163,7 @@ public class Grasshopper : MonoBehaviour
             rb.isKinematic = true;
             hasBeenLaunched = false;
             offScreen = true;
+            gameOver.SetActive(true);
         }
         else
         {

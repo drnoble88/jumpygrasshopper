@@ -6,13 +6,12 @@ using TMPro;
 
 public class Scoring : MonoBehaviour
 {
-
-
     public int score = 0;
     public int highscore = 0;
+    public int finalscore;
     [SerializeField] TextMeshProUGUI ScoreText;
     [SerializeField] TextMeshProUGUI HighScoreText;
-
+    [SerializeField] TextMeshProUGUI FinalScoreText;
     void Start()
     {
         score = 0;
@@ -52,5 +51,7 @@ public class Scoring : MonoBehaviour
             highscore = score;
         }
         UpdateHighScore();
+
+        FinalScoreText.text = "Total leaves: " + score;
     }
 }
