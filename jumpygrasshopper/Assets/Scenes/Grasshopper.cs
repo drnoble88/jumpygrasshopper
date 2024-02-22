@@ -117,6 +117,13 @@ public class Grasshopper : MonoBehaviour
             score.AddScore();
         }
     }
+
+    public void OnRestartButtonClick()
+        {
+            RespawnGrasshopper();
+            score.ResetScore();
+            gameOver.SetActive(false);
+        }
     private void Update()
     {
         ScrollForeground();
@@ -130,11 +137,11 @@ public class Grasshopper : MonoBehaviour
 
         // Check if the grasshopper is out of the screen boundaries
         
+
+
         if (Input.GetKeyDown(KeyCode.R))
         {
-            RespawnGrasshopper();
-            score.ResetScore();
-            gameOver.SetActive(false);
+            
         }
 
         if  ((!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space) && transform.position.y > -3f) || (!hasBeenLaunched && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && transform.position.y > -3f))
