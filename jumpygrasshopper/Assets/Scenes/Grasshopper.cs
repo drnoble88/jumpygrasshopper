@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Grasshopper : MonoBehaviour
 {
+    public GameObject canvasScores;
     public GameObject gameOver;
     public float rotationSpeed = 30f; // The rotation speed in degrees per second
     private Rigidbody2D rb; // Rigidbody2D reference
@@ -118,12 +118,7 @@ public class Grasshopper : MonoBehaviour
         }
     }
 
-    public void OnRestartButtonClick()
-        {
-            RespawnGrasshopper();
-            score.ResetScore();
-            gameOver.SetActive(false);
-        }
+
     private void Update()
     {
         ScrollForeground();
@@ -135,16 +130,8 @@ public class Grasshopper : MonoBehaviour
             RotateGrasshopper();
         }
 
-        // Check if the grasshopper is out of the screen boundaries
-        
 
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            
-        }
-
-        if  ((!hasBeenLaunched && Input.GetKeyDown(KeyCode.Space) && transform.position.y > -3f) || (!hasBeenLaunched && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && transform.position.y > -3f))
+        if  (!hasBeenLaunched && ((Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && transform.position.y > -3f))
         {
             LaunchGrasshopper();
         }
@@ -171,6 +158,7 @@ public class Grasshopper : MonoBehaviour
             hasBeenLaunched = false;
             offScreen = true;
             gameOver.SetActive(true);
+            canvasScores.SetActive(false);
         }
         else
         {
@@ -178,6 +166,14 @@ public class Grasshopper : MonoBehaviour
         }
 
     }
+
+    public void OnRestartButtonClick()
+        {
+            RespawnGrasshopper();
+            score.ResetScore();
+            gameOver.SetActive(false);
+            canvasScores.SetActive(true);
+        }
 
     void MoveForeground()
     {

@@ -9,9 +9,11 @@ public class Scoring : MonoBehaviour
     public int score = 0;
     public int highscore = 0;
     public int finalscore;
+    public int finalhighscore;
     [SerializeField] TextMeshProUGUI ScoreText;
     [SerializeField] TextMeshProUGUI HighScoreText;
     [SerializeField] TextMeshProUGUI FinalScoreText;
+    [SerializeField] TextMeshProUGUI FinalHighScoreText;
     void Start()
     {
         score = 0;
@@ -52,6 +54,7 @@ public class Scoring : MonoBehaviour
         }
         UpdateHighScore();
 
-        FinalScoreText.text = "Total leaves: " + score;
+        FinalScoreText.text = "Total Leaves: " + score;
+        FinalHighScoreText.text = "High Score: " + highscore;
     }
 }
